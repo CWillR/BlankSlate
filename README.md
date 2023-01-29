@@ -11,7 +11,7 @@ FEATURES TBA (To Be Added):
   Undo button for mistakes, 
   Eraser option that uses brush size tool as well, 
   Bucket option to fill an area with a color, 
-  Gradient option, 
+  Gradient option. 
   
 Potential Ways To Organize Code in the way we are "supposed to"
   Create a class for what the brush is and create a default
