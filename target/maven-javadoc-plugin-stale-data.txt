@@ -1,0 +1,46 @@
+@options
+@packages
+@argfile
+-encoding
+'UTF-8'
+-protected
+-source
+'17'
+-sourcepath
+'C:/Users/Conner Williams/Documents/NetBeansProjects/BlankSlate/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2023. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/Conner Williams/Documents/NetBeansProjects/BlankSlate/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'BlankSlate 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'BlankSlate 1.0-SNAPSHOT API'
+com.team5.blankslate
+'C:/Users/Conner Williams/Documents/NetBeansProjects/BlankSlate/src/main/java/com/team5/blankslate/BlankSlate.java'
+'C:/Users/Conner Williams/Documents/NetBeansProjects/BlankSlate/src/main/java/com/team5/blankslate/DrawArea.java'
+C:\Users\Conner Williams\Documents\NetBeansProjects\BlankSlate\src\main\java = 1674955795647
+C:\Users\Conner Williams\Documents\NetBeansProjects\BlankSlate\target\site\apidocs\allclasses-index.html = 1674959046361
+C:\Users\Conner Williams\Documents\NetBeansProjects\BlankSlate\target\site\apidocs\allpackages-index.html = 1674959046363
+C:\Users\Conner Williams\Documents\NetBeansProjects\BlankSlate\target\site\apidocs\element-list = 1674959046320
+C:\Users\Conner Williams\Documents\NetBeansProjects\BlankSlate\target\site\apidocs\help-doc.html = 1674959046383
+C:\Users\Conner Williams\Documents\NetBeansProjects\BlankSlate\target\site\apidocs\index-all.html = 1674959046379
+C:\Users\Conner Williams\Documents\NetBeansProjects\BlankSlate\target\site\apidocs\index.html = 1674959046380
+C:\Users\Conner Williams\Documents\NetBeansProjects\BlankSlate\target\site\apidocs\jquery-ui.overrides.css = 1674959046395
+C:\Users\Conner Williams\Documents\NetBeansProjects\BlankSlate\target\site\apidocs\member-search-index.js = 1674959046368
+C:\Users\Conner Williams\Documents\NetBeansProjects\BlankSlate\target\site\apidocs\module-search-index.js = 1674959046364
+C:\Users\Conner Williams\Documents\NetBeansProjects\BlankSlate\target\site\apidocs\overview-tree.html = 1674959046353
+C:\Users\Conner Williams\Documents\NetBeansProjects\BlankSlate\target\site\apidocs\package-search-index.js = 1674959046365
+C:\Users\Conner Williams\Documents\NetBeansProjects\BlankSlate\target\site\apidocs\script.js = 1674959046386
+C:\Users\Conner Williams\Documents\NetBeansProjects\BlankSlate\target\site\apidocs\search.js = 1674959046387
+C:\Users\Conner Williams\Documents\NetBeansProjects\BlankSlate\target\site\apidocs\serialized-form.html = 1674959046339
+C:\Users\Conner Williams\Documents\NetBeansProjects\BlankSlate\target\site\apidocs\stylesheet.css = 1674959046385
+C:\Users\Conner Williams\Documents\NetBeansProjects\BlankSlate\target\site\apidocs\tag-search-index.js = 1674959046369
+C:\Users\Conner Williams\Documents\NetBeansProjects\BlankSlate\target\site\apidocs\type-search-index.js = 1674959046367
