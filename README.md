@@ -19,4 +19,4 @@ Potential Ways To Organize Code in the way we are "supposed to"
    default will be the medium brush size and red
   As we add more modifications we add more parts to the class that are needed to determine the output of the brush (cursor)
    potentially another class that would utilized for a linked list, with each node containing each keystroke/change on the canvas 
-   traverse backwards through the list to “undo” actions within the program
+   traverse backwards through the list to “undo” actions within the program.
