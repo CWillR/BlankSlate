@@ -11,58 +11,71 @@ package projectblankslate;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Point;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class DrawingTest extends JPanel {
-    private ArrayList<Point> points = new ArrayList<>();
-    private ArrayList<Color> colors = new ArrayList<>();
-    private boolean drawingLine = false;
-    private Point startPoint;
-    private Point endPoint;
-    private Color currentColor = Color.BLACK;
+    //Image we'll be drawing in
+    private Image image;
+    //Graphics2D object --> used to draw on
+    private Graphics2D g2;
+    //Mouse coordinates
+    private int currentX, currentY, oldX, oldY;
 
     public DrawingTest() {
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
-                startPoint = new Point(e.getX(), e.getY());
-                drawingLine = true;
+                //save coord x,y when mouse is pressed
+                oldX = e.getX();
+                oldY = e.getY();
             }
+            
 
             public void mouseReleased(MouseEvent e) {
-                endPoint = new Point(e.getX(), e.getY());
-                drawingLine = false;
-                points.add(startPoint);
-                points.add(endPoint);
-                colors.add(currentColor);
-                repaint();
+                //coord x,y when drag mouse
+                currentX = e.getX();
+                currentY = e.getY();
+                if (g2 != null) {
+                    //draw line if g2 context not null
+                    g2.drawLine(oldX, oldY, currentX, currentY);
+                    //refresh draw area to repaint
+                    repaint();
+                    //store current coords x,y as old x,y
+                    oldX = currentX;
+                    oldY = currentY;
+                }
             }
         });
     }
 
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        for (int i = 0; i < points.size(); i += 2) {
-            g.setColor(colors.get(i / 2));
-            Point start = points.get(i);
-            Point end = points.get(i + 1);
-            if (start.x == end.x && start.y == end.y) {
-                g.drawLine(start.x, start.y, end.x + 1, end.y + 1);
-            } else {
-                g.drawRect(Math.min(start.x, end.x), Math.min(start.y, end.y),
-                        Math.abs(end.x - start.x), Math.abs(end.y - start.y));
-            }
+        if (image == null) {
+            //image to draw null --> we create
+            image = createImage(getSize().width, getSize().height);
+            g2 = (Graphics2D) image.getGraphics();
+            //enable antialiasing
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                    RenderingHints.VALUE_ANTIALIAS_ON);
+            //clear draw area
+            clear();
         }
+        
+        g.drawImage(image, 0, 0, null);
     }
-
-    public void setCurrentColor(Color c) {
-        currentColor = c;
+    
+    public void clear() {  
+        g2.setPaint(Color.white);
+        //draw white on entire draw area to clear
+        g2.fillRect(0, 0, getSize().width, getSize().height);
+        g2.setPaint(Color.black);
+        repaint();
     }
-
+    
     public static void main(String[] args) {
         JFrame frame = new JFrame("Drawing Canvas");
         DrawingTest canvas = new DrawingTest();
