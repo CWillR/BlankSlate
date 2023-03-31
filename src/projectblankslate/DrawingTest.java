@@ -14,15 +14,21 @@ import javax.swing.JPanel;
  
 public class DrawingTest{
  
-  JButton clearBtn, colorChooser;
+  JButton clearBtn, colorChooser, save, increaseThick, decreaseThick;
   Drawing drawing;
   ActionListener actionListener = new ActionListener() {
  
   public void actionPerformed(ActionEvent e) {
-      if (e.getSource() == clearBtn) {
-        drawing.clear();
-      } else if (e.getSource() == colorChooser) {
+      if (e.getSource() == colorChooser) {
         drawing.colorChooser();
+      } else if (e.getSource() == increaseThick) {
+        drawing.increaseThick();
+      } else if (e.getSource() == decreaseThick) {
+        drawing.decreaseThick();
+      } else if (e.getSource() == clearBtn) {
+        drawing.clear();
+      } else if (e.getSource() == save) {
+        drawing.save();
       }
     }
   };
@@ -45,15 +51,25 @@ public class DrawingTest{
  
     // create controls to apply colors and call clear feature
     JPanel controls = new JPanel();
- 
-    clearBtn = new JButton("Clear");
-    clearBtn.addActionListener(actionListener);
+    
     colorChooser = new JButton("Change Color");
     colorChooser.addActionListener(actionListener);
+    increaseThick = new JButton("Thicker Pen");
+    increaseThick.addActionListener(actionListener);
+    decreaseThick = new JButton("Thinner Pen");
+    decreaseThick.addActionListener(actionListener); 
+    clearBtn = new JButton("Clear");
+    clearBtn.addActionListener(actionListener);
+    save = new JButton("Save Drawing");
+    save.addActionListener(actionListener);
+
  
     // add to panel
     controls.add(colorChooser);
+    controls.add(increaseThick);
+    controls.add(decreaseThick);
     controls.add(clearBtn);
+    controls.add(save);
  
     // add to content pane
     content.add(controls, BorderLayout.NORTH);
