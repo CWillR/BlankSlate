@@ -17,8 +17,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class Drawing extends JComponent {
     
@@ -27,14 +30,12 @@ public class Drawing extends JComponent {
     //Graphics2D object --> used to draw on
     private Graphics2D g2;
     //Mouse coordinates
-    private int currentX, currentY, oldX, oldY, thickness = 3;
+    private int currentX, currentY, oldX, oldY, thickness = 1;
     
     // NOTE: NEW CODE
     public boolean isDrawingRectangle, isDrawingCircle = false;
     private int startX, startY, endX, endY;
-    // NEW CODE END
-    
-    // NOTE: NEW CODE
+
     public Drawing() {
         setDoubleBuffered(false);
         
@@ -105,18 +106,14 @@ public class Drawing extends JComponent {
     public static BufferedImage toBufferedImage(Image image) {
         if(image instanceof BufferedImage) {
             return (BufferedImage) image;
-        }
-            
-        BufferedImage bimage = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-            
+        }   
+        BufferedImage bimage = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);   
         Graphics2D bGr = bimage.createGraphics();
         bGr.drawImage(image, 0, 0, null);
-        bGr.dispose();
-            
+        bGr.dispose();  
         return bimage;
         }
     
-    // NOTE: NEW CODE
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -128,8 +125,7 @@ public class Drawing extends JComponent {
             //enable antialiasing
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                     RenderingHints.VALUE_ANTIALIAS_ON);
-            //g2.setStroke(new BasicStroke(thickness));
-            //clear draw area
+            g2.setStroke(new BasicStroke(5));
             clear();
         }
 
@@ -149,7 +145,6 @@ public class Drawing extends JComponent {
                     Math.abs(endX - startX), Math.abs(endY - startY));
         }
     } 
-    // END NEW CODE
     
     //Change the color of the pen (g2) to that of the user's choice
     public void colorChooser() {
@@ -187,13 +182,43 @@ public class Drawing extends JComponent {
     }
     
     public void save() {
-        try {
-            BufferedImage bi = toBufferedImage(image);
-            File outputfile = new File("test.jpg");
-            ImageIO.write(bi, "jpg", outputfile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }        
+        String fileName;
+        JFrame namePopup = new JFrame();
+        fileName = JOptionPane.showInputDialog(namePopup,"Name your drawing (leaving the response blank or naming file 'null' will not save your drawing)");
+        File tmpDir = new File("Drawings//" + fileName + ".jpg");
+        boolean exists = tmpDir.exists();
+        if (exists == true){
+            int i = 1;
+            while (i==1){
+                JFrame overwritePopup = new JFrame();
+                int result = JOptionPane.showConfirmDialog(overwritePopup, 
+                    "That file name already exists. Would you like to overwrite it?",
+                    "Overwrite File?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if(result == JOptionPane.YES_OPTION){
+                    i = 0;
+                }
+                if(result == JOptionPane.NO_OPTION) {
+                    fileName = JOptionPane.showInputDialog(namePopup,"Name file");
+                    tmpDir = new File("Drawings//" + fileName + ".jpg");
+                    exists = tmpDir.exists();
+                    if (exists == true) {
+                        i = 1;
+                    }
+                    if (exists == false) {
+                        i = 0;
+                    }
+                }
+            }
+        }
+        if ((fileName != null) && (fileName.length()>0)) {
+            try {
+                BufferedImage bi = toBufferedImage(image);
+                File outputfile = new File("Drawings//" + fileName + ".jpg");
+                ImageIO.write(bi, "jpg", outputfile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } 
+        }  
     } 
     
     // Draw rectangle
@@ -214,4 +239,3 @@ public class Drawing extends JComponent {
         isDrawingCircle = false;
     }
 }
-
