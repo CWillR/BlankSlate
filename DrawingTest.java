@@ -79,6 +79,7 @@ public class DrawingTest {
     circle = new JButton("Circle");
     circle.addActionListener(actionListener);
      
+   
     // add to panel
     controls.add(lineBtn);
     controls.add(rectangle);
