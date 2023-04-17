@@ -30,7 +30,7 @@ public class Drawing extends JComponent {
     //Graphics2D object --> used to draw on
     private Graphics2D g2;
     //Mouse coordinates
-    private int currentX, currentY, oldX, oldY, thickness = 1;
+    private int currentX, currentY, oldX, oldY, thickness = 3;
     
     // NOTE: NEW CODE
     public boolean isDrawingRectangle, isDrawingCircle = false;
@@ -66,7 +66,7 @@ public class Drawing extends JComponent {
                         g2.fillOval(shapeX, shapeY, shapeWidth, shapeHeight);
                         repaint();
                     }
-                }
+            }
     
         });
         
@@ -134,13 +134,13 @@ public class Drawing extends JComponent {
         if (isDrawingRectangle) {
             // draw the rectangle as the user drags the mouse
             Graphics2D g2d = (Graphics2D) g;
-            g2d.setStroke(new BasicStroke(thickness));
+            g2d.setStroke(new BasicStroke(3));
             g2d.drawRect(Math.min(startX, endX), Math.min(startY, endY),
                     Math.abs(endX - startX), Math.abs(endY - startY));
         } else if (isDrawingCircle) {
             // draw the rectangle as the user drags the mouse
             Graphics2D g2d = (Graphics2D) g;
-            g2d.setStroke(new BasicStroke(thickness));
+            g2d.setStroke(new BasicStroke(3));
             g2d.drawOval(Math.min(startX, endX), Math.min(startY, endY),
                     Math.abs(endX - startX), Math.abs(endY - startY));
         }
@@ -177,14 +177,16 @@ public class Drawing extends JComponent {
         //draw white on entire draw area to clear
         g2.fillRect(0, 0, getSize().width, getSize().height);
         g2.setPaint(Color.black);
-        g2.setStroke(new BasicStroke(1));
+        g2.setStroke(new BasicStroke(3));
+        thickness = 3;
+        drawLine();
         repaint();
     }
     
     public void save() {
         String fileName;
         JFrame namePopup = new JFrame();
-        fileName = JOptionPane.showInputDialog(namePopup,"Name your drawing (leaving the response blank or naming file 'null' will not save your drawing)");
+        fileName = JOptionPane.showInputDialog(namePopup,"Name your drawing (leaving the response blank or naming file 'null' will not save your drawing)", "Save",JOptionPane.INFORMATION_MESSAGE);
         File tmpDir = new File("Drawings//" + fileName + ".jpg");
         boolean exists = tmpDir.exists();
         if (exists == true){
@@ -238,4 +240,30 @@ public class Drawing extends JComponent {
         isDrawingRectangle = false;
         isDrawingCircle = false;
     }
+    //Help button pop up.
+    public static void help() {
+        JOptionPane.showMessageDialog(null, """
+                                                                       Welcome to Blank Slate!
+                                            This tutorial will help you understand the features present in this application 
+                                            Line: This tool draws lines anywhere on the canvas by holding down on the left 
+                                            mouse button.
+                                            Rectangle: This tool draws a rectangle infilled with selected color starting 
+                                            from the point you click the left mouse button and connecting to where you 
+                                            release the left mouse button. Also has a preview available for the rectangle 
+                                            you will draw upon release. Furthermore this is the deafault tool.
+                                            Circle: This tool draws a circle infilled with selected color starting from the 
+                                            point you click the left mouse button and looping to where you release the left
+                                            mouse button. Also has a preview available for the circle you will draw upon 
+                                            release.
+                                            Change Color: This button opens the color changing menu complete with swatches, 
+                                            RGB, CMYK and more. Also Has a preview available for color selection. 
+                                            Default is black.
+                                            Thicker Pen: Thickens pen width by 1. Default is 3.
+                                            Thinner Pen: Thins pen width by 1. Default is 3.
+                                            Clear: Returns tool, color and pen to default as well as clearing canvas. 
+                                            Save Drawing: Captures your masterpiece in its entirety and saves it to the 
+                                            drawings folder inside of the black slate app.
+                                            Help: This page right here.""" , "Tool Tips", JOptionPane.INFORMATION_MESSAGE);
+    }
 }
+
