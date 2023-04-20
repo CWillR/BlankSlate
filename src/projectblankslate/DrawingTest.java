@@ -1,4 +1,3 @@
-
 package projectblankslate;
  
 import java.awt.BorderLayout;
